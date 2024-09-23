@@ -1,0 +1,13 @@
+/client/PaperClient/node_modules/
+API/obj/Debug/net8.0/API.AssemblyInfo.cs
+API/obj/Debug/net8.0/API.AssemblyInfoInputs.cache
+API/obj/rider.project.model.nuget.info
+API/obj/rider.project.restore.info
+DataAccess/obj/Debug/net8.0/DataAccess.AssemblyInfo.cs
+DataAccess/obj/Debug/net8.0/DataAccess.AssemblyInfoInputs.cache
+DataAccess/obj/rider.project.model.nuget.info
+DataAccess/obj/rider.project.restore.info
+Service/obj/Debug/net8.0/Service.AssemblyInfo.cs
+Service/obj/Debug/net8.0/Service.AssemblyInfoInputs.cache
+Service/obj/rider.project.model.nuget.info
+Service/obj/rider.project.restore.info
