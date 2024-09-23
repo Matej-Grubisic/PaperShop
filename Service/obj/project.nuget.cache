@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "1nzvon+pC/c=",
+  "dgSpecHash": "4g1MdprNjF0=",
   "success": true,
-  "projectFilePath": "C:\\Users\\grubi\\Desktop\\3rdSem\\Paper\\Service\\Service.csproj",
+  "projectFilePath": "C:\\Users\\grubi\\Desktop\\3rdSem\\PaperShop\\Service\\Service.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\grubi\\.nuget\\packages\\fluentvalidation\\11.5.1\\fluentvalidation.11.5.1.nupkg.sha512",
     "C:\\Users\\grubi\\.nuget\\packages\\fluentvalidation.aspnetcore\\11.3.0\\fluentvalidation.aspnetcore.11.3.0.nupkg.sha512",

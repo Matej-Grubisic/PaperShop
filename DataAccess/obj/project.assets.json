@@ -2268,11 +2268,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\grubi\\Desktop\\3rdSem\\Paper\\DataAccess\\DataAccess.csproj",
+      "projectUniqueName": "C:\\Users\\grubi\\Desktop\\3rdSem\\PaperShop\\DataAccess\\DataAccess.csproj",
       "projectName": "DataAccess",
-      "projectPath": "C:\\Users\\grubi\\Desktop\\3rdSem\\Paper\\DataAccess\\DataAccess.csproj",
+      "projectPath": "C:\\Users\\grubi\\Desktop\\3rdSem\\PaperShop\\DataAccess\\DataAccess.csproj",
       "packagesPath": "C:\\Users\\grubi\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\grubi\\Desktop\\3rdSem\\Paper\\DataAccess\\obj\\",
+      "outputPath": "C:\\Users\\grubi\\Desktop\\3rdSem\\PaperShop\\DataAccess\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\grubi\\AppData\\Roaming\\NuGet\\NuGet.Config"

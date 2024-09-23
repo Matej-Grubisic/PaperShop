@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "Q3DwQn5cVX8=",
+  "dgSpecHash": "t0LxYL74MUQ=",
   "success": true,
-  "projectFilePath": "C:\\Users\\grubi\\Desktop\\3rdSem\\Paper\\DataAccess\\DataAccess.csproj",
+  "projectFilePath": "C:\\Users\\grubi\\Desktop\\3rdSem\\PaperShop\\DataAccess\\DataAccess.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\grubi\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
     "C:\\Users\\grubi\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\6.0.0\\microsoft.bcl.asyncinterfaces.6.0.0.nupkg.sha512",

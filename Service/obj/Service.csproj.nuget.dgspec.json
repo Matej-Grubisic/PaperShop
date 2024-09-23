@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\grubi\\Desktop\\3rdSem\\Paper\\Service\\Service.csproj": {}
+    "C:\\Users\\grubi\\Desktop\\3rdSem\\PaperShop\\Service\\Service.csproj": {}
   },
   "projects": {
-    "C:\\Users\\grubi\\Desktop\\3rdSem\\Paper\\DataAccess\\DataAccess.csproj": {
+    "C:\\Users\\grubi\\Desktop\\3rdSem\\PaperShop\\DataAccess\\DataAccess.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\grubi\\Desktop\\3rdSem\\Paper\\DataAccess\\DataAccess.csproj",
+        "projectUniqueName": "C:\\Users\\grubi\\Desktop\\3rdSem\\PaperShop\\DataAccess\\DataAccess.csproj",
         "projectName": "DataAccess",
-        "projectPath": "C:\\Users\\grubi\\Desktop\\3rdSem\\Paper\\DataAccess\\DataAccess.csproj",
+        "projectPath": "C:\\Users\\grubi\\Desktop\\3rdSem\\PaperShop\\DataAccess\\DataAccess.csproj",
         "packagesPath": "C:\\Users\\grubi\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\grubi\\Desktop\\3rdSem\\Paper\\DataAccess\\obj\\",
+        "outputPath": "C:\\Users\\grubi\\Desktop\\3rdSem\\PaperShop\\DataAccess\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\grubi\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -78,14 +78,14 @@
         }
       }
     },
-    "C:\\Users\\grubi\\Desktop\\3rdSem\\Paper\\Service\\Service.csproj": {
+    "C:\\Users\\grubi\\Desktop\\3rdSem\\PaperShop\\Service\\Service.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\grubi\\Desktop\\3rdSem\\Paper\\Service\\Service.csproj",
+        "projectUniqueName": "C:\\Users\\grubi\\Desktop\\3rdSem\\PaperShop\\Service\\Service.csproj",
         "projectName": "Service",
-        "projectPath": "C:\\Users\\grubi\\Desktop\\3rdSem\\Paper\\Service\\Service.csproj",
+        "projectPath": "C:\\Users\\grubi\\Desktop\\3rdSem\\PaperShop\\Service\\Service.csproj",
         "packagesPath": "C:\\Users\\grubi\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\grubi\\Desktop\\3rdSem\\Paper\\Service\\obj\\",
+        "outputPath": "C:\\Users\\grubi\\Desktop\\3rdSem\\PaperShop\\Service\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\grubi\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -100,8 +100,8 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Users\\grubi\\Desktop\\3rdSem\\Paper\\DataAccess\\DataAccess.csproj": {
-                "projectPath": "C:\\Users\\grubi\\Desktop\\3rdSem\\Paper\\DataAccess\\DataAccess.csproj"
+              "C:\\Users\\grubi\\Desktop\\3rdSem\\PaperShop\\DataAccess\\DataAccess.csproj": {
+                "projectPath": "C:\\Users\\grubi\\Desktop\\3rdSem\\PaperShop\\DataAccess\\DataAccess.csproj"
               }
             }
           }
