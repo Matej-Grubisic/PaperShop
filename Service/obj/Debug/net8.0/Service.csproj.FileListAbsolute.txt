@@ -1,0 +1,15 @@
+C:\Users\grubi\Desktop\3rdSem\Paper\Service\bin\Debug\net8.0\Service.deps.json
+C:\Users\grubi\Desktop\3rdSem\Paper\Service\bin\Debug\net8.0\Service.dll
+C:\Users\grubi\Desktop\3rdSem\Paper\Service\bin\Debug\net8.0\Service.pdb
+C:\Users\grubi\Desktop\3rdSem\Paper\Service\obj\Debug\net8.0\Service.csproj.AssemblyReference.cache
+C:\Users\grubi\Desktop\3rdSem\Paper\Service\obj\Debug\net8.0\Service.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\grubi\Desktop\3rdSem\Paper\Service\obj\Debug\net8.0\Service.AssemblyInfoInputs.cache
+C:\Users\grubi\Desktop\3rdSem\Paper\Service\obj\Debug\net8.0\Service.AssemblyInfo.cs
+C:\Users\grubi\Desktop\3rdSem\Paper\Service\obj\Debug\net8.0\Service.csproj.CoreCompileInputs.cache
+C:\Users\grubi\Desktop\3rdSem\Paper\Service\obj\Debug\net8.0\Service.dll
+C:\Users\grubi\Desktop\3rdSem\Paper\Service\obj\Debug\net8.0\refint\Service.dll
+C:\Users\grubi\Desktop\3rdSem\Paper\Service\obj\Debug\net8.0\Service.pdb
+C:\Users\grubi\Desktop\3rdSem\Paper\Service\obj\Debug\net8.0\ref\Service.dll
+C:\Users\grubi\Desktop\3rdSem\Paper\Service\bin\Debug\net8.0\DataAccess.dll
+C:\Users\grubi\Desktop\3rdSem\Paper\Service\bin\Debug\net8.0\DataAccess.pdb
+C:\Users\grubi\Desktop\3rdSem\Paper\Service\obj\Debug\net8.0\Service.csproj.Up2Date
