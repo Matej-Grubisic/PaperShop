@@ -11,4 +11,9 @@ public class PaperRepository(PaperContext context) : IPaperRepository
         context.SaveChanges();
         return paper;
     }
+
+    public List<Paper> GetAllPaper()
+    {
+        return context.Papers.ToList();
+    }
 }

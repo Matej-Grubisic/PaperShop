@@ -20,5 +20,14 @@ public class PaperController(IPaperService service,
     {
         var patient = service.CreatePaper(createPaperDto);
         return Ok(patient);
-    }    
+    }
+
+    [HttpGet]
+    [Route("")]
+
+    public ActionResult<List<Paper>> GetAllPapers(int limit = 10, int startAt = 0)
+    {
+        var papers = service.GetAllPapers(limit, startAt);
+        return Ok(papers);
+    }
 }

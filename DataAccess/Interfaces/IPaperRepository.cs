@@ -5,4 +5,6 @@ namespace DataAccess.Interfaces;
 public interface IPaperRepository
 {
     public Paper CreatePaper(Paper paper);
+
+    public List<Paper> GetAllPaper();
 }
