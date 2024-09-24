@@ -1,19 +1,18 @@
 import {useAtom} from "jotai";
 import {PapersAtom} from "./atoms/PaperAtom";
 import {useEffect} from "react";
-//import {http} from "./http.ts";
+import {http} from "./http.ts";
 
 export function useInitializeData() {
     
-    const [, setPatients] = useAtom(PapersAtom);
+    const [, setPapers] = useAtom(PapersAtom);
     
     
     useEffect(() => {
-        /*http.api.paperCreatePatient().then((response) => {
-            setPatients(response.data);
+        http.api.paperGetAllPapers().then((response) => {
+            setPapers(response.data);
         }).catch(e => {
             console.log(e)
         })
-        */
     }, [])
 }
