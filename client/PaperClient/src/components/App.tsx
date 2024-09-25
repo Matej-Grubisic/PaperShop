@@ -5,6 +5,7 @@ import {DevTools} from "jotai-devtools";
 import Navigation from "./Navigation.tsx";
 import {useAtom} from "jotai";
 import Home from "./Home.tsx";
+import NewProduct from "./NewProduct"
 
 const App = () => {
 
@@ -14,6 +15,7 @@ const App = () => {
         <Toaster position={"bottom-center"}/>
         <Routes>
             <Route path="/Home" element={<Home/>}/>
+            <Route path="/new-product" element={<NewProduct/>}/>
         </Routes>
         <DevTools/>
 

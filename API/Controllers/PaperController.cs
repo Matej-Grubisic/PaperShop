@@ -16,10 +16,10 @@ public class PaperController(IPaperService service,
 {
     [HttpPost]
     [Route("")]
-    public ActionResult<Paper> CreatePatient(CreatePaperDto createPaperDto)
+    public ActionResult<Paper> CreatePaper(CreatePaperDto createPaperDto)
     {
-        var patient = service.CreatePaper(createPaperDto);
-        return Ok(patient);
+        var paper = service.CreatePaper(createPaperDto);
+        return Ok(paper);
     }
 
     [HttpGet]

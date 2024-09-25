@@ -222,15 +222,45 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Paper
-     * @name PaperCreatePatient
+     * @name PaperCreatePaper
      * @request POST:/api/Paper
      */
-    paperCreatePatient: (data: CreatePaperDto, params: RequestParams = {}) =>
+    paperCreatePaper: (data: CreatePaperDto, params: RequestParams = {}) =>
       this.request<Paper, any>({
         path: `/api/Paper`,
         method: "POST",
         body: data,
         type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Paper
+     * @name PaperGetAllPapers
+     * @request GET:/api/Paper
+     */
+    paperGetAllPapers: (
+      query?: {
+        /**
+         * @format int32
+         * @default 10
+         */
+        limit?: number;
+        /**
+         * @format int32
+         * @default 0
+         */
+        startAt?: number;
+      },
+      params: RequestParams = {},
+    ) =>
+      this.request<Paper[], any>({
+        path: `/api/Paper`,
+        method: "GET",
+        query: query,
         format: "json",
         ...params,
       }),
