@@ -68,6 +68,13 @@ export interface Property {
   papers?: Paper[];
 }
 
+export interface CreateCustomerDto {
+  name?: string;
+  address?: string;
+  phone?: string;
+  email?: string;
+}
+
 export interface CreatePaperDto {
   name?: string;
   discontinued?: boolean;
@@ -218,6 +225,83 @@ export class HttpClient<SecurityDataType = unknown> {
  */
 export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDataType> {
   api = {
+    /**
+     * No description
+     *
+     * @tags Customer
+     * @name CustomerCreateCustomer
+     * @request POST:/api/Customer
+     */
+    customerCreateCustomer: (data: CreateCustomerDto, params: RequestParams = {}) =>
+      this.request<Paper, any>({
+        path: `/api/Customer`,
+        method: "POST",
+        body: data,
+        type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Customer
+     * @name CustomerGetAllCustomers
+     * @request GET:/api/Customer
+     */
+    customerGetAllCustomers: (
+      query?: {
+        /**
+         * @format int32
+         * @default 10
+         */
+        limit?: number;
+        /**
+         * @format int32
+         * @default 0
+         */
+        startAt?: number;
+      },
+      params: RequestParams = {},
+    ) =>
+      this.request<Paper[], any>({
+        path: `/api/Customer`,
+        method: "GET",
+        query: query,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Customer
+     * @name CustomerGetCustomer
+     * @request GET:/api/Customer/{customerId}
+     */
+    customerGetCustomer: (customerId: number, params: RequestParams = {}) =>
+      this.request<Paper, any>({
+        path: `/api/Customer/${customerId}`,
+        method: "GET",
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Customer
+     * @name CustomerDeleteCustomer
+     * @request DELETE:/api/Customer/{customerId}
+     */
+    customerDeleteCustomer: (customerId: number, params: RequestParams = {}) =>
+      this.request<Paper, any>({
+        path: `/api/Customer/${customerId}`,
+        method: "DELETE",
+        format: "json",
+        ...params,
+      }),
+
     /**
      * No description
      *

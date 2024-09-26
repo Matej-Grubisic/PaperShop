@@ -1,20 +1,15 @@
-import {useEffect} from "react";
+//import {useEffect} from "react";
 import {useAtom} from "jotai";
 import {PapersAtom} from "../atoms/PaperAtom.tsx";
 import {useInitializeData} from "../useInitializeData.ts";
 import { useNavigate } from 'react-router-dom';
-import {http} from "../http";
+//import {http} from "../http";
 
 export default function Home() {
 
     const [papers] = useAtom(PapersAtom);
     
-    const navigate = useNavigate()
-
-
-    useEffect(() => {
-        
-    }, []); 
+    const navigate = useNavigate();
     
     useInitializeData();
 
