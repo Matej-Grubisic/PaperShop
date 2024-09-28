@@ -15,4 +15,6 @@ export function useInitializeData() {
             console.log(e)
         })
     }, [])
+    
 }
+

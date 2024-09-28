@@ -1,12 +1,15 @@
 import React, { useState } from 'react';
 import { http } from "../http"; // Import the HTTP functions
 import {CreatePaperDto} from "../Api";
+import { useNavigate } from 'react-router-dom';
 
 export default function NewProduct() {
     const [name, setProductName] = useState('');
     const [price, setPrice] = useState(0);
     const [stock, setStock] = useState(0);
     const [discontinued, setDiscontinued] = useState(false); // New state for discontinued
+
+    const navigate = useNavigate()
     
     
     var paperDto : CreatePaperDto = {
@@ -28,6 +31,8 @@ export default function NewProduct() {
         setPrice(0);
         setStock(0);
         setDiscontinued(false); // Reset discontinued state
+
+        navigate('/home');
     };
 
     return (
@@ -78,7 +83,7 @@ export default function NewProduct() {
                     />
                 </div>
 
-                <button type="submit" className="submit-button">
+                <button type="submit" className="submit-button"  >
                     Submit
                 </button>
             </form>

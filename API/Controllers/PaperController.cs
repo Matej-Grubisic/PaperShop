@@ -29,4 +29,33 @@ public class PaperController(IPaperService service,
         var papers = service.GetAllPapers(limit, startAt);
         return Ok(papers);
     }
+    
+    [HttpDelete]
+    [Route("{id}")]
+    public ActionResult DeletePaper(int id)
+    {
+        var result = service.DeletePaper(id);
+
+        if (result == null)
+        {
+            return NotFound(new { message = "Paper not found or already deleted" });
+        }
+
+        return Ok(result);
+    }
+    
+    // Add this new endpoint for discontinuing a paper
+    [HttpPatch]
+    [Route("{id}/discontinue")]
+    public ActionResult<Paper> DiscontinuePaper(int id)
+    {
+        var paper = service.DiscontinuePaper(id);
+
+        if (paper == null)
+        {
+            return NotFound(new { message = "Paper not found" });
+        }
+
+        return Ok(paper);
+    }
 }

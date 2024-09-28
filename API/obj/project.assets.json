@@ -3673,19 +3673,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\grubi\\.nuget\\packages\\": {}
+    "C:\\Users\\Vedran\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\grubi\\Desktop\\3rdSem\\PaperShop\\API\\API.csproj",
+      "projectUniqueName": "C:\\Users\\Vedran\\Documents\\PaperShop\\API\\API.csproj",
       "projectName": "API",
-      "projectPath": "C:\\Users\\grubi\\Desktop\\3rdSem\\PaperShop\\API\\API.csproj",
-      "packagesPath": "C:\\Users\\grubi\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\grubi\\Desktop\\3rdSem\\PaperShop\\API\\obj\\",
+      "projectPath": "C:\\Users\\Vedran\\Documents\\PaperShop\\API\\API.csproj",
+      "packagesPath": "C:\\Users\\Vedran\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Vedran\\Documents\\PaperShop\\API\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\grubi\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "C:\\Users\\Vedran\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net8.0"
@@ -3697,11 +3697,11 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "C:\\Users\\grubi\\Desktop\\3rdSem\\PaperShop\\DataAccess\\DataAccess.csproj": {
-              "projectPath": "C:\\Users\\grubi\\Desktop\\3rdSem\\PaperShop\\DataAccess\\DataAccess.csproj"
+            "C:\\Users\\Vedran\\Documents\\PaperShop\\DataAccess\\DataAccess.csproj": {
+              "projectPath": "C:\\Users\\Vedran\\Documents\\PaperShop\\DataAccess\\DataAccess.csproj"
             },
-            "C:\\Users\\grubi\\Desktop\\3rdSem\\PaperShop\\Service\\Service.csproj": {
-              "projectPath": "C:\\Users\\grubi\\Desktop\\3rdSem\\PaperShop\\Service\\Service.csproj"
+            "C:\\Users\\Vedran\\Documents\\PaperShop\\Service\\Service.csproj": {
+              "projectPath": "C:\\Users\\Vedran\\Documents\\PaperShop\\Service\\Service.csproj"
             }
           }
         }
@@ -3761,7 +3761,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.401/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Users\\Vedran\\.dotnet\\sdk\\8.0.303/PortableRuntimeIdentifierGraph.json"
       }
     }
   }
