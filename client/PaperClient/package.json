@@ -11,6 +11,7 @@
     "scaffold": "npx swagger-typescript-api -p http://localhost:5000/swagger/v1/swagger.json -o ./src/ -n Api.ts --axios"
   },
   "dependencies": {
+    "axios": "^1.7.7",
     "daisyui": "^4.12.10",
     "jotai": "^2.10.0",
     "jotai-devtools": "^0.10.1",

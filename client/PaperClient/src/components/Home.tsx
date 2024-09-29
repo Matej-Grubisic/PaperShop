@@ -1,14 +1,22 @@
+
 import {useEffect} from "react";
-import { useAtom} from "jotai";
+import {useAtom} from "jotai";
 import {PapersAtom} from "../atoms/PaperAtom.tsx";
 import {useInitializeData} from "../useInitializeData.ts";
 import { useNavigate } from 'react-router-dom';
-import { http } from "../http"; // Import the HTTP functions
+import {http} from "../http";
+
+
+
 
 
 export default function Home() {
 
     
+
+    const navigate = useNavigate();
+    
+
 
     const [papers] = useAtom(PapersAtom);
     const navigate = useNavigate()
@@ -17,6 +25,7 @@ export default function Home() {
     useEffect(() => {
 
     }, []);
+
 
     useInitializeData();
 
@@ -30,7 +39,7 @@ export default function Home() {
     return (
         <div>
 
-            {/* List of papers */}
+            
             <ul className="space-y-4">
                 {papers.map((paper) => (
                     <li key={paper.id}>
@@ -61,7 +70,7 @@ export default function Home() {
                 ))}
             </ul>
 
-            {/* White New Product Button */}
+            
             <button
                 className="btn bg-white text-black border border-gray-300 hover:bg-gray-100 mt-8"
                 onClick={() => navigate('/new-product')}
