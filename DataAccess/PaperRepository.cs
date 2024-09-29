@@ -42,7 +42,9 @@ public class PaperRepository(PaperContext context) : IPaperRepository
     public void Update(Paper paper)
     {
         context.Papers.Update(paper);
-        context.SaveChanges(); 
+        context.SaveChanges();
+    }
+
     public Customer CreateCustomer(Customer customer)
     {
         context.Customers.Add(customer);
