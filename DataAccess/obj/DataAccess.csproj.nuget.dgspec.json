@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\grubi\\Desktop\\3rdSem\\PaperShop\\DataAccess\\DataAccess.csproj": {}
+    "C:\\Users\\Vedran\\Documents\\PaperShop\\DataAccess\\DataAccess.csproj": {}
   },
   "projects": {
-    "C:\\Users\\grubi\\Desktop\\3rdSem\\PaperShop\\DataAccess\\DataAccess.csproj": {
+    "C:\\Users\\Vedran\\Documents\\PaperShop\\DataAccess\\DataAccess.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\grubi\\Desktop\\3rdSem\\PaperShop\\DataAccess\\DataAccess.csproj",
+        "projectUniqueName": "C:\\Users\\Vedran\\Documents\\PaperShop\\DataAccess\\DataAccess.csproj",
         "projectName": "DataAccess",
-        "projectPath": "C:\\Users\\grubi\\Desktop\\3rdSem\\PaperShop\\DataAccess\\DataAccess.csproj",
-        "packagesPath": "C:\\Users\\grubi\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\grubi\\Desktop\\3rdSem\\PaperShop\\DataAccess\\obj\\",
+        "projectPath": "C:\\Users\\Vedran\\Documents\\PaperShop\\DataAccess\\DataAccess.csproj",
+        "packagesPath": "C:\\Users\\Vedran\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Vedran\\Documents\\PaperShop\\DataAccess\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\grubi\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\Vedran\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
@@ -74,7 +74,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.401/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Users\\Vedran\\.dotnet\\sdk\\8.0.303/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

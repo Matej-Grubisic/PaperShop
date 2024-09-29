@@ -11,6 +11,11 @@ public interface IPaperService
     public PaperDto CreatePaper(CreatePaperDto createPaperDto);
 
     public List<Paper> GetAllPapers(int limit, int startAt);
+  
+    public Paper DeletePaper(int id);
+    
+    Paper? DiscontinuePaper(int id);
+
 
     public CustomerDto CreateCustomer(CreateCustomerDto createCustomerDto);
 
@@ -21,6 +26,7 @@ public interface IPaperService
     public void DeleteCustomer(int id);
     
     public OrderEntryDto CreateOrderEntry(CreateOrderEntryDto createOrderEntryDto);
+
 
 }
 
@@ -38,6 +44,7 @@ public class PaperService(IPaperRepository paperRepository, PaperContext context
     {
         return context.Papers.OrderBy(p => p.Id).Skip(startAt).Take(limit).ToList();
     }
+
 
     public CustomerDto CreateCustomer(CreateCustomerDto createCustomerDto)
     {
@@ -69,4 +76,26 @@ public class PaperService(IPaperRepository paperRepository, PaperContext context
         return new OrderEntryDto().FromEntity(newOrderEntry);
     }
 
+
+    public Paper DeletePaper(int id)
+    {
+        var paper = paperRepository.DeletePaper(id);
+        
+        if (paper == null)
+        {
+            return null;
+        }
+        context.SaveChanges();
+        return paper;
+    }
+    public Paper? DiscontinuePaper(int id)
+    {
+        var paper = paperRepository.GetById(id);
+        if (paper == null) return null;
+
+        paper.Discontinued = true;
+        paperRepository.Update(paper);
+        return paper;
+    }
+    
 }

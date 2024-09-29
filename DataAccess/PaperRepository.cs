@@ -17,6 +17,32 @@ public class PaperRepository(PaperContext context) : IPaperRepository
         return context.Papers.ToList();
     }
 
+
+    
+    public Paper DeletePaper(int id)
+    {
+        
+        var paper = context.Papers.FirstOrDefault(p => p.Id == id);
+
+        
+        if (paper == null)
+        {
+            return null;
+        }
+
+        context.SaveChanges();
+        return paper;
+    }
+
+    public Paper? GetById(int id)
+    {
+        return context.Papers.FirstOrDefault(p => p.Id == id);
+    }
+
+    public void Update(Paper paper)
+    {
+        context.Papers.Update(paper);
+        context.SaveChanges(); 
     public Customer CreateCustomer(Customer customer)
     {
         context.Customers.Add(customer);
@@ -43,5 +69,6 @@ public class PaperRepository(PaperContext context) : IPaperRepository
         context.OrderEntries.Add(orderEntry);
         context.SaveChanges();
         return orderEntry;
+
     }
 }
