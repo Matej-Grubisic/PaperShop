@@ -6,6 +6,7 @@ import { useInitializeData } from '../useInitializeData';
 import { useAtom } from 'jotai';
 import { PropertyAtom } from '../atoms/PropertyAtom';
 
+
 export default function NewProduct() {
 
     useInitializeData()
@@ -15,13 +16,15 @@ export default function NewProduct() {
     const [name, setProductName] = useState('');
     const [price, setPrice] = useState(0);
     const [stock, setStock] = useState(0);
-    const [discontinued, setDiscontinued] = useState(false); // New state for discontinued
+    const [property, setProperty] = useState('');
+    
 
     const navigate = useNavigate()
     
     
     var paperDto : CreatePaperDto = {
-        name, discontinued , price, stock, properties
+        
+        name, discontinued : false , price, stock, properties
     }
 
     const handleFormSubmit = async (event: React.FormEvent) => {
@@ -38,7 +41,9 @@ export default function NewProduct() {
         setProductName('');
         setPrice(0);
         setStock(0);
-        setDiscontinued(false); // Reset discontinued state
+
+        setProperty(''); 
+        
 
         navigate('/home');
     };
@@ -56,17 +61,6 @@ export default function NewProduct() {
                         placeholder="Enter product name"
                         required
                     />
-                </div>
-
-                <div className="form-group">
-                    <label>
-                        <input
-                            type="checkbox"
-                            checked={discontinued}
-                            onChange={(e) => setDiscontinued(e.target.checked)} // Update state based on checkbox
-                        />
-                        Discontinued
-                    </label>
                 </div>
 
                 <div className="form-group">
@@ -89,6 +83,23 @@ export default function NewProduct() {
                         placeholder="Enter stock quantity"
                         required
                     />
+                </div>
+
+                {/* New dropdown for properties */}
+                <div className="form-group">
+                    <label>Select Property:</label>
+                    <select
+                        value={property}
+                        onChange={(e) => setProperty(e.target.value)}
+                        required
+                    >
+                        <option value="">Select property</option>
+                        <option value="Eco-friendly">Eco-friendly</option>
+                        <option value="Recyclable">Recyclable</option>
+                        <option value="Waterproof">Waterproof</option>
+                        <option value="Lightweight">Lightweight</option>
+                        <option value="Biodegradable">Biodegradable</option>
+                    </select>
                 </div>
 
                 <button type="submit" className="submit-button"  >

@@ -27,6 +27,8 @@ public interface IPaperService
     
     public OrderEntryDto CreateOrderEntry(CreateOrderEntryDto createOrderEntryDto);
 
+    public List<Property> GetAllProperties();
+
 
 }
 
@@ -96,6 +98,11 @@ public class PaperService(IPaperRepository paperRepository, PaperContext context
         paper.Discontinued = true;
         paperRepository.Update(paper);
         return paper;
+    }
+    
+    public List<Property> GetAllProperties()
+    {
+        return context.Properties.ToList();
     }
     
 }
