@@ -9,30 +9,14 @@
  * ---------------------------------------------------------------
  */
 
-export interface Paper {
+export interface Customer {
   /** @format int32 */
   id?: number;
   name?: string;
-  discontinued?: boolean;
-  /** @format int32 */
-  stock?: number;
-  /** @format double */
-  price?: number;
-  orderEntries?: OrderEntry[];
-  properties?: Property[];
-}
-
-export interface OrderEntry {
-  /** @format int32 */
-  id?: number;
-  /** @format int32 */
-  quantity?: number;
-  /** @format int32 */
-  productId?: number | null;
-  /** @format int32 */
-  orderId?: number | null;
-  order?: Order | null;
-  product?: Paper | null;
+  address?: string | null;
+  phone?: string | null;
+  email?: string | null;
+  orders?: Order[];
 }
 
 export interface Order {
@@ -51,14 +35,30 @@ export interface Order {
   orderEntries?: OrderEntry[];
 }
 
-export interface Customer {
+export interface OrderEntry {
+  /** @format int32 */
+  id?: number;
+  /** @format int32 */
+  quantity?: number;
+  /** @format int32 */
+  productId?: number | null;
+  /** @format int32 */
+  orderId?: number | null;
+  order?: Order | null;
+  product?: Paper | null;
+}
+
+export interface Paper {
   /** @format int32 */
   id?: number;
   name?: string;
-  address?: string | null;
-  phone?: string | null;
-  email?: string | null;
-  orders?: Order[];
+  discontinued?: boolean;
+  /** @format int32 */
+  stock?: number;
+  /** @format double */
+  price?: number;
+  orderEntries?: OrderEntry[];
+  properties?: Property[];
 }
 
 export interface Property {
@@ -73,6 +73,26 @@ export interface CreateCustomerDto {
   address?: string;
   phone?: string;
   email?: string;
+}
+
+export interface CreateOrderDto {
+  /** @format date-time */
+  orderDate?: string;
+  /** @format date */
+  deliveryDate?: string | null;
+  status?: string;
+  /** @format double */
+  totalAmount?: number;
+  /** @format int32 */
+  customerId?: number | null;
+  orderEntries?: CreateOrderEntryDto[];
+}
+
+export interface CreateOrderEntryDto {
+  /** @format int32 */
+  quantity?: number;
+  /** @format int32 */
+  productId?: number | null;
 }
 
 export interface CreatePaperDto {
@@ -233,7 +253,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request POST:/api/Customer
      */
     customerCreateCustomer: (data: CreateCustomerDto, params: RequestParams = {}) =>
-      this.request<Paper, any>({
+      this.request<Customer, any>({
         path: `/api/Customer`,
         method: "POST",
         body: data,
@@ -264,7 +284,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       },
       params: RequestParams = {},
     ) =>
-      this.request<Paper[], any>({
+      this.request<Customer[], any>({
         path: `/api/Customer`,
         method: "GET",
         query: query,
@@ -280,7 +300,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/api/Customer/{customerId}
      */
     customerGetCustomer: (customerId: number, params: RequestParams = {}) =>
-      this.request<Paper, any>({
+      this.request<Customer, any>({
         path: `/api/Customer/${customerId}`,
         method: "GET",
         format: "json",
@@ -295,9 +315,43 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request DELETE:/api/Customer/{customerId}
      */
     customerDeleteCustomer: (customerId: number, params: RequestParams = {}) =>
-      this.request<Paper, any>({
+      this.request<Customer, any>({
         path: `/api/Customer/${customerId}`,
         method: "DELETE",
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Order
+     * @name OrderCreateOrder
+     * @request POST:/api/Order
+     */
+    orderCreateOrder: (data: CreateOrderDto, params: RequestParams = {}) =>
+      this.request<Order, any>({
+        path: `/api/Order`,
+        method: "POST",
+        body: data,
+        type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags OrderEntry
+     * @name OrderEntryCreateOrderEntry
+     * @request POST:/api/OrderEntry
+     */
+    orderEntryCreateOrderEntry: (data: CreateOrderEntryDto, params: RequestParams = {}) =>
+      this.request<OrderEntry, any>({
+        path: `/api/OrderEntry`,
+        method: "POST",
+        body: data,
+        type: ContentType.Json,
         format: "json",
         ...params,
       }),

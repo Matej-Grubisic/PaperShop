@@ -73,4 +73,12 @@ public class PaperRepository(PaperContext context) : IPaperRepository
         return orderEntry;
 
     }
+
+    public Order CreateOrder(Order order)
+    {
+        context.OrderEntries.AddRange(order.OrderEntries);
+        context.Orders.Add(order);
+        context.SaveChanges();
+        return order;
+    }
 }

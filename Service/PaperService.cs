@@ -27,6 +27,7 @@ public interface IPaperService
     
     public OrderEntryDto CreateOrderEntry(CreateOrderEntryDto createOrderEntryDto);
 
+    public OrderDto CreateOrder(CreateOrderDto createOrderDto);
 
 }
 
@@ -96,6 +97,13 @@ public class PaperService(IPaperRepository paperRepository, PaperContext context
         paper.Discontinued = true;
         paperRepository.Update(paper);
         return paper;
+    }
+
+    public OrderDto CreateOrder(CreateOrderDto createOrderDto)
+    {
+        var order = createOrderDto.ToOrder();
+        Order newOrder = paperRepository.CreateOrder(order);
+        return new OrderDto().FromEntity(newOrder);
     }
     
 }

@@ -20,4 +20,7 @@ public interface IPaperRepository
     public Paper DeletePaper(int id);
     Paper? GetById(int id);
     void Update(Paper paper); // Make sure this method exists
+
+    public Order CreateOrder(Order order);
+
 }

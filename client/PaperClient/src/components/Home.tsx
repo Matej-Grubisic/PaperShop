@@ -19,7 +19,6 @@ export default function Home() {
 
 
     const [papers] = useAtom(PapersAtom);
-    const navigate = useNavigate()
 
 
     useEffect(() => {
