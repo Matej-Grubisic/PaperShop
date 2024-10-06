@@ -6,7 +6,8 @@ import Home from "./Home.tsx";
 import NewProduct from "./NewProduct";
 import SingleCustomer from './SingleCustomer';
 import Customers from './Customers';
-import Orders from "./Orders.tsx";
+import Order from "./Order.tsx";
+import AllOrders from './AllOrders';
 
 const App = () => {
 
@@ -19,7 +20,8 @@ const App = () => {
             <Route path="/new-product" element={<NewProduct/>}/>
             <Route path="/customer/:id" element={<SingleCustomer/>} />
             <Route path="/customers" element={<Customers/>} />
-            <Route path="/order" element={<Orders/>} />
+            <Route path="/order" element={<Order/>} />
+            <Route path="/all-orders" element={<AllOrders/>} />
         </Routes>
         <DevTools/>
 

@@ -342,6 +342,44 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     /**
      * No description
      *
+     * @tags Order
+     * @name OrderGetAllOrders
+     * @request GET:/api/Order
+     */
+    orderGetAllOrders: (params: RequestParams = {}) =>
+      this.request<Order[], any>({
+        path: `/api/Order`,
+        method: "GET",
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Order
+     * @name OrderUpdateOrder
+     * @request PATCH:/api/Order
+     */
+    orderUpdateOrder: (
+      query?: {
+        status?: string;
+        /** @format int32 */
+        orderId?: number;
+      },
+      params: RequestParams = {},
+    ) =>
+      this.request<Order, any>({
+        path: `/api/Order`,
+        method: "PATCH",
+        query: query,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
      * @tags OrderEntry
      * @name OrderEntryCreateOrderEntry
      * @request POST:/api/OrderEntry
@@ -352,6 +390,21 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
         method: "POST",
         body: data,
         type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags OrderEntry
+     * @name OrderEntryGetAllOrderEntries
+     * @request GET:/api/OrderEntry
+     */
+    orderEntryGetAllOrderEntries: (params: RequestParams = {}) =>
+      this.request<OrderEntry[], any>({
+        path: `/api/OrderEntry`,
+        method: "GET",
         format: "json",
         ...params,
       }),

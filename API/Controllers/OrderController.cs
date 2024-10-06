@@ -22,4 +22,20 @@ public class OrderController(IPaperService service,
         //var order = service.CreateOrder(orderDto);
         return Ok(order);
     }
+    
+    [HttpGet]
+    [Route("")]
+    public ActionResult<List<Order>> GetAllOrders()
+    {
+        var orders = service.GetAllOrders(); 
+        return Ok(orders);
+    }
+
+    [HttpPatch]
+    [Route("")]
+    public ActionResult<Order> UpdateOrder(string status, int orderId)
+    {
+        var order = service.UpdateStatus(status, orderId);
+        return Ok(order);
+    }
 }

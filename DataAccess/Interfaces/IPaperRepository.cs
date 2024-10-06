@@ -23,4 +23,11 @@ public interface IPaperRepository
 
     public Order CreateOrder(Order order);
 
+    public List<Order> GetAllOrders();
+
+    public List<OrderEntry> GetAllOrderEntries();
+
+    public void UpdateOrder(Order order);
+
+
 }

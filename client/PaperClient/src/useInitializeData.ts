@@ -3,6 +3,8 @@ import {PapersAtom} from "./atoms/PaperAtom";
 import {CustomersAtom} from "./atoms/CustomerAtom";
 import {useEffect} from "react";
 import {http} from "./http.ts";
+import { OrdersAtom } from "./atoms/OrderAtom.tsx";
+import { AllOrderEntriesAtom } from "./atoms/OrderEntriesAtom.tsx";
 
 export function useInitializeData() {
     
@@ -10,6 +12,8 @@ export function useInitializeData() {
     
     const [, setPapers] = useAtom(PapersAtom);
     const [, setCustomers] = useAtom(CustomersAtom);
+    const [, setOrders] = useAtom(OrdersAtom);
+    const [, setAllOrderEntries] = useAtom(AllOrderEntriesAtom);
     
     useEffect(() => {
         http.api.paperGetAllPapers().then((response) => {
@@ -27,6 +31,21 @@ export function useInitializeData() {
         })
     }, [])
 
+    useEffect(() => {
+        http.api.orderGetAllOrders().then((response) => {
+            setOrders(response.data);
+        }).catch(e => {
+            console.log("Failed to Fetch all customers" + e);
+        })
+    }, [])
+
+    useEffect(() => {
+        http.api.orderEntryGetAllOrderEntries().then((response) => {
+            setAllOrderEntries(response.data);
+        }).catch(e => {
+            console.log("Failed to Fetch all papers" + e)
+        })
+    }, [])
 
     
 }

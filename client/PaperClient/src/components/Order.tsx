@@ -5,14 +5,14 @@ import {PapersAtom} from '../atoms/PaperAtom';
 
 import { useAtom } from 'jotai';
 import {useInitializeData} from '../useInitializeData'
-import React, { useState } from "react";
-import {CreateOrderDto, CreateOrderEntryDto, Customer, Paper} from '../Api';
+import React, {useEffect, useState} from "react";
+import {CreateOrderDto, CreateOrderEntryDto, Customer, Paper, OrderEntry} from '../Api';
 import { OrderEntriesAtom } from '../atoms/OrderEntriesAtom';
 import { http } from '../http';
 import toast from "react-hot-toast";
 
 
-export default function Orders() {
+export default function Order() {
     const [customers] = useAtom(CustomersAtom);
     const [papers] = useAtom(PapersAtom);
     const [orderEntries, setOrderEntries] = useAtom(OrderEntriesAtom);
@@ -44,7 +44,7 @@ export default function Orders() {
     
 
         let OrderDto : CreateOrderDto = {
-            status,
+            status: status,
             deliveryDate,
             totalAmount,
             customerId: customer.id,
@@ -60,29 +60,6 @@ export default function Orders() {
             console.error('Error creating order:', error);
         }
     };
-     
-    /*
-    async function handleFormSubmt1(event: React.FormEvent) {
-        event.preventDefault();
-        setStatus("pending");
-
-        let OrderDto: CreateOrderDto = {
-            status,
-            totalAmount,
-            customerId: customer.id,
-            customer,
-            orderEntries
-        }
-
-        try {
-            const response = await http.api.orderCreateOrder(OrderDto);
-            console.log('New order created:', response.data);
-        } catch (error) {
-            console.error('Error creating order:', error);
-        }
-    };
-    
-     */
     
 
      function createEntry() {
@@ -155,7 +132,7 @@ export default function Orders() {
                         <select
                             onChange={(e) => setProduct(papers.find(p => p.id === Number(e.target.value)) || {} as Paper)}>
                             <option value={undefined}>Pick a product</option>
-                            {papers.map((paper) => (
+                            {papers.filter((p)=>p.discontinued != true).map((paper) => (
                                 <option value={paper.id} key={paper.id}>
                                     {paper.name}
                                 </option>

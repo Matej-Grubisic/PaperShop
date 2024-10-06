@@ -73,6 +73,11 @@ public class PaperRepository(PaperContext context) : IPaperRepository
         return orderEntry;
 
     }
+    
+    public List<OrderEntry> GetAllOrderEntries()
+    {
+        return context.OrderEntries.ToList();
+    }
 
     public Order CreateOrder(Order order)
     {
@@ -81,4 +86,17 @@ public class PaperRepository(PaperContext context) : IPaperRepository
         context.SaveChanges();
         return order;
     }
+    
+    public List<Order> GetAllOrders()
+    {
+        return context.Orders.ToList();
+    }
+    
+    public void UpdateOrder(Order order)
+    {
+        context.Orders.Update(order);
+        context.SaveChanges();
+    }
+    
+    
 }

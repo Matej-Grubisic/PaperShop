@@ -29,6 +29,12 @@ public interface IPaperService
 
     public OrderDto CreateOrder(CreateOrderDto createOrderDto);
 
+    public List<Order> GetAllOrders();
+
+    public List<OrderEntry> GetAllOrderEntries();
+    
+    public Order UpdateStatus(string status, int orderId);
+
 }
 
 public class PaperService(IPaperRepository paperRepository, PaperContext context): IPaperService
@@ -99,11 +105,29 @@ public class PaperService(IPaperRepository paperRepository, PaperContext context
         return paper;
     }
 
+    public List<OrderEntry> GetAllOrderEntries()
+    {
+        return context.OrderEntries.ToList();
+    }
+
     public OrderDto CreateOrder(CreateOrderDto createOrderDto)
     {
         var order = createOrderDto.ToOrder();
         Order newOrder = paperRepository.CreateOrder(order);
         return new OrderDto().FromEntity(newOrder);
     }
-    
+
+    public List<Order> GetAllOrders()
+    {
+        return context.Orders.OrderBy(o => o.Id).ToList();
+    }
+
+    public Order UpdateStatus(string status, int orderId)
+    {
+        var order = context.Orders.Where(o => o.Id == orderId).FirstOrDefault(); 
+        if (order == null) return null;
+        order.Status = status;
+        paperRepository.UpdateOrder(order);
+        return order;
+    }
 }
