@@ -94,6 +94,10 @@ export interface CreatePaperDto {
   properties?: Property[];
 }
 
+export interface CreatePropertyDto {
+  propertyName?: string;
+}
+
 import type { AxiosInstance, AxiosRequestConfig, AxiosResponse, HeadersDefaults, ResponseType } from "axios";
 import axios from "axios";
 
@@ -416,6 +420,23 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       this.request<Property[], any>({
         path: `/api/Property`,
         method: "GET",
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Property
+     * @name PropertyCreateProperty
+     * @request POST:/api/Property
+     */
+    propertyCreateProperty: (data: CreatePropertyDto, params: RequestParams = {}) =>
+      this.request<Paper, any>({
+        path: `/api/Property`,
+        method: "POST",
+        body: data,
+        type: ContentType.Json,
         format: "json",
         ...params,
       }),

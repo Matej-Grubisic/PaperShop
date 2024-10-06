@@ -27,6 +27,8 @@ export default function NewProduct() {
         name, discontinued : false , price, stock, properties
     }
 
+    
+
     const handleFormSubmit = async (event: React.FormEvent) => {
         event.preventDefault();
 
@@ -94,15 +96,15 @@ export default function NewProduct() {
                         required
                     >
                         <option value="">Select property</option>
-                        <option value="Eco-friendly">Eco-friendly</option>
-                        <option value="Recyclable">Recyclable</option>
-                        <option value="Waterproof">Waterproof</option>
-                        <option value="Lightweight">Lightweight</option>
-                        <option value="Biodegradable">Biodegradable</option>
+                        {properties.map((prop) => (
+                            <option key={prop.id} value={prop.id}>
+                                {prop.propertyName}
+                            </option>
+                        ))}
                     </select>
                 </div>
 
-                <button type="submit" className="submit-button"  >
+                <button type="submit" className="submit-button">
                     Submit
                 </button>
             </form>

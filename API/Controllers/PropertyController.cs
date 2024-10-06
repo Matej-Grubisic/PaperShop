@@ -2,6 +2,7 @@ using DataAccess.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using Service;
+using Service.TransferModels.Requests;
 
 namespace Api.Controllers;
 
@@ -17,6 +18,14 @@ public class PropertyController(IPaperService service,
     {
         var properties = service.GetAllProperties();
         return Ok(properties);
+    }
+    
+    [HttpPost]
+    [Route("")]
+    public ActionResult<Paper> CreateProperty(CreatePropertyDto createPropertyDto)
+    {
+        var property = service.CreateProperty(createPropertyDto);
+        return Ok(property);
     }
     
 }

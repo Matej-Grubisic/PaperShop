@@ -73,4 +73,15 @@ public class PaperRepository(PaperContext context) : IPaperRepository
         return orderEntry;
 
     }
+    public List<Property> GetAllProperties()
+    {
+        return context.Properties.ToList();
+    }
+
+    public Property CreateProperty(Property property)
+    {
+        context.Properties.Add(property);
+        context.SaveChanges();
+        return property;
+    }
 }

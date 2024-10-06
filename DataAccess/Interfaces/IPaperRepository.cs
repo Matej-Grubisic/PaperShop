@@ -20,4 +20,8 @@ public interface IPaperRepository
     public Paper DeletePaper(int id);
     Paper? GetById(int id);
     void Update(Paper paper); // Make sure this method exists
+
+    public List<Property> GetAllProperties();
+
+    public Property CreateProperty(Property property);
 }

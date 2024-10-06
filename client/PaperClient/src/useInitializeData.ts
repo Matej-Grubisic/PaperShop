@@ -28,15 +28,16 @@ export function useInitializeData() {
             console.log("Failed to Fetch all customers" + e);
         })
     }, [])
-    /*
+    
+    
     useEffect(() => {
-        http.api().propertyGetAll.then((response) => {
-            setProperties(response.data);
-        }).catch(e => {
-            console.log("Failed to Fetch all customers" + e);
-        })
+       http.api.propertyGetAllPropreties().then((response) => {
+           setProperties(response.data);
+       }).catch(e =>{
+           console.log("Failed to fetch all properties" + e);
+       })
     }, [])
-    */
+    
     
 }
 

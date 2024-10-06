@@ -29,6 +29,8 @@ public interface IPaperService
 
     public List<Property> GetAllProperties();
 
+    public PropertyDto CreateProperty(CreatePropertyDto createCreateProperty);
+
 
 }
 
@@ -104,5 +106,11 @@ public class PaperService(IPaperRepository paperRepository, PaperContext context
     {
         return context.Properties.ToList();
     }
-    
+
+    public PropertyDto CreateProperty(CreatePropertyDto createCreateProperty)
+    {
+        var property = createCreateProperty.ToProperty();
+        Property newProperty = paperRepository.CreateProperty(property);
+        return new PropertyDto().FromEntity(newProperty);
+    }
 }
