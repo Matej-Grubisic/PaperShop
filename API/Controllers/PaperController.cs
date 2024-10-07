@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using Service;
 using Service.TransferModels.Requests;
+using Service.TransferModels.Responses;
 
 namespace Api.Controllers;
 
@@ -16,7 +17,7 @@ public class PaperController(IPaperService service,
 {
     [HttpPost]
     [Route("")]
-    public ActionResult<Paper> CreatePaper(CreatePaperDto createPaperDto)
+    public ActionResult<PaperDto> CreatePaper(CreatePaperDto createPaperDto)
     {
         var paper = service.CreatePaper(createPaperDto);
         return Ok(paper);

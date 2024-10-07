@@ -13,7 +13,7 @@ public class CreatePaperDto
 
     public double Price { get; set; }
     
-    public ICollection<Property> Properties { get; set; } = new List<Property>();
+    public ICollection<Property> PropertyIds { get; set; } = new List<Property>();
 
 
     public Paper ToPaper()
@@ -24,7 +24,7 @@ public class CreatePaperDto
             Discontinued = Discontinued,
             Stock = Stock,
             Price = Price,
-            Properties = Properties
+            Properties = PropertyIds
         };
     }
 }
