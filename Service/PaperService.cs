@@ -39,7 +39,6 @@ public class PaperService(IPaperRepository paperRepository, PaperContext context
     public PaperDto CreatePaper(CreatePaperDto createPaperDto)
     {
         //createPaperValidator.ValidateAndThrow(createPaperDto);
-      
         var paper = createPaperDto.ToPaper();
         foreach (var paperProperty in paper.Properties)
         {
