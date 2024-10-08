@@ -18,7 +18,7 @@ export default function Home() {
     
 
 
-    const [papers] = useAtom(PapersAtom);
+    const [papers , setPapers] = useAtom(PapersAtom);
    
 
 
@@ -33,6 +33,32 @@ export default function Home() {
         http.api.paperDiscontinuePaper(Number(id));
         window.location.reload();
    };
+
+    
+    function handleRestock(id: number | undefined) {
+        if (!id) return;
+        
+        const paper = papers.find((p) => p.id === id);
+        if (!paper || paper.stock === undefined) return; 
+
+        const updatedStock = (paper.stock ?? 0) + 50; 
+        
+        http.api.paperRestockPaper(id, updatedStock)
+            .then(() => {
+                setPapers((prevPapers) =>
+                    prevPapers.map((p) =>
+                        p.id === id ? { ...p, stock: updatedStock } : p
+                    )
+                );
+            })
+            .catch((error: unknown) => {
+                if (error instanceof Error) {
+                    console.error("Failed to restock paper:", error.message);
+                } else {
+                    console.error("An unknown error occurred while restocking paper.");
+                }
+            });
+    }
 
 
 
@@ -60,7 +86,7 @@ export default function Home() {
                                 </button>
                                 <button
                                     className="btn bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600"
-                                    //onClick={() => handleRestock(paper.id)}
+                                    onClick={() => handleRestock(paper.id)}
                                 >
                                     Restock
                                 </button>

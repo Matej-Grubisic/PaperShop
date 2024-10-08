@@ -1,3 +1,4 @@
+using AutoMapper;
 using DataAccess.Interfaces;
 using DataAccess.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -5,6 +6,7 @@ using Microsoft.Extensions.Options;
 using Service;
 using Service.TransferModels.Requests;
 using Service.TransferModels.Responses;
+
 
 namespace Api.Controllers;
 
@@ -14,7 +16,9 @@ namespace Api.Controllers;
 public class PaperController(IPaperService service,
     IOptionsMonitor<AppOptions> options
 ) : ControllerBase
+
 {
+    
     [HttpPost]
     [Route("")]
     public ActionResult<PaperDto> CreatePaper(CreatePaperDto createPaperDto)
@@ -58,5 +62,36 @@ public class PaperController(IPaperService service,
         }
 
         return Ok(paper);
+    }
+    
+    [HttpPost]
+    [Route("restock/{id}")]
+    public ActionResult<PaperDto> RestockPaper(int id, [FromBody] int updatedStock)
+    {
+        if (updatedStock <= 0)
+        {
+            return BadRequest("Invalid stock quantity.");
+        }
+
+        var paper = service.GetPaperById(id);
+        if (paper == null)
+        {
+            return NotFound("Paper not found");
+        }
+
+        paper.Stock += updatedStock;
+        service.UpdatePaper(paper);
+
+        // Manually map to DTO
+        var paperDto = new PaperDto
+        {
+            Id = paper.Id,
+            Name = paper.Name,
+            Stock = paper.Stock,
+            Price = paper.Price,
+            Discontinued = paper.Discontinued
+        };
+
+        return Ok(paperDto);
     }
 }

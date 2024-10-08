@@ -84,6 +84,24 @@ export interface CreateOrderEntryDto {
   orderId?: number | null;
 }
 
+export interface PaperDto {
+  /** @format int32 */
+  id?: number;
+  name?: string;
+  discontinued?: boolean;
+  /** @format int32 */
+  stock?: number;
+  /** @format double */
+  price?: number;
+  properties?: PropertyDto[];
+}
+
+export interface PropertyDto {
+  /** @format int32 */
+  id?: number;
+  propertyName?: string;
+}
+
 export interface CreatePaperDto {
   name?: string;
   discontinued?: boolean;
@@ -91,7 +109,7 @@ export interface CreatePaperDto {
   stock?: number;
   /** @format double */
   price?: number;
-  properties?: Property[];
+  propertyIds?: PropertyDto[];
 }
 
 export interface CreatePropertyDto {
@@ -341,7 +359,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request POST:/api/Paper
      */
     paperCreatePaper: (data: CreatePaperDto, params: RequestParams = {}) =>
-      this.request<Paper, any>({
+      this.request<PaperDto, any>({
         path: `/api/Paper`,
         method: "POST",
         body: data,
@@ -405,6 +423,23 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       this.request<Paper, any>({
         path: `/api/Paper/${id}/discontinue`,
         method: "PATCH",
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Paper
+     * @name PaperRestockPaper
+     * @request POST:/api/Paper/restock/{id}
+     */
+    paperRestockPaper: (id: number, data: number, params: RequestParams = {}) =>
+      this.request<PaperDto, any>({
+        path: `/api/Paper/restock/${id}`,
+        method: "POST",
+        body: data,
+        type: ContentType.Json,
         format: "json",
         ...params,
       }),

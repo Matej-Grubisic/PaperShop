@@ -32,6 +32,10 @@ public interface IPaperService
     public PropertyDto CreateProperty(CreatePropertyDto createCreateProperty);
 
 
+    public Paper GetPaperById(int id);
+
+    public void UpdatePaper(Paper paper);
+
 }
 
 public class PaperService(IPaperRepository paperRepository, PaperContext context): IPaperService
@@ -118,4 +122,16 @@ public class PaperService(IPaperRepository paperRepository, PaperContext context
         Property newProperty = paperRepository.CreateProperty(property);
         return new PropertyDto().FromEntity(newProperty);
     }
+
+    public Paper GetPaperById(int id)
+    {
+        return context.Papers.Find(id);
+    }
+
+    public void UpdatePaper(Paper paper)
+    {
+        context.Papers.Update(paper);
+        context.SaveChanges();
+    }
+    
 }
