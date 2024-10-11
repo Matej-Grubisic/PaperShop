@@ -28,6 +28,10 @@ public interface IPaperRepository
     Paper? GetById(int id);
     void Update(Paper paper); // Make sure this method exists
 
+    public List<Property> GetAllProperties();
+
+    public Property CreateProperty(Property property);
+
     public Order CreateOrder(Order order);
 
     public List<Order> GetAllOrders();

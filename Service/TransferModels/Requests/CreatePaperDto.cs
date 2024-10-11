@@ -1,5 +1,6 @@
 using System.Net.Security;
 using DataAccess.Models;
+using Service.TransferModels.Responses;
 
 namespace Service.TransferModels.Requests;
 
@@ -13,7 +14,7 @@ public class CreatePaperDto
 
     public double Price { get; set; }
     
-    public ICollection<Property> Properties { get; set; } = new List<Property>();
+    public ICollection<PropertyDto> PropertyIds { get; set; } = new List<PropertyDto>();
 
 
     public Paper ToPaper()
@@ -24,7 +25,7 @@ public class CreatePaperDto
             Discontinued = Discontinued,
             Stock = Stock,
             Price = Price,
-            Properties = Properties
+            Properties = PropertyIds.Select(p => new Property(){PropertyName = p.PropertyName, Id = p.Id}).ToList()
         };
     }
 }

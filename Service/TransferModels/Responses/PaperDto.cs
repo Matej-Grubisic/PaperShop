@@ -14,7 +14,7 @@ public class PaperDto
             Discontinued = paper.Discontinued,
             Stock = paper.Stock,
             Price = paper.Price,
-            Properties = paper.Properties,
+            Properties = paper.Properties.Select(p => new PropertyDto(){PropertyName = p.PropertyName, Id = p.Id}).ToList(),
         };
     }
     
@@ -28,5 +28,5 @@ public class PaperDto
 
     public double Price { get; set; }
 
-    public ICollection<Property> Properties { get; set; }
+    public ICollection<PropertyDto> Properties { get; set; }
 }

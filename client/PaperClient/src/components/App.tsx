@@ -8,6 +8,7 @@ import SingleCustomer from './SingleCustomer';
 import Customers from './Customers';
 import Order from "./Order.tsx";
 import AllOrders from './AllOrders';
+import NewProperty from "./NewProperty";
 
 const App = () => {
 
@@ -22,6 +23,7 @@ const App = () => {
             <Route path="/customers" element={<Customers/>} />
             <Route path="/order" element={<Order/>} />
             <Route path="/all-orders" element={<AllOrders/>} />
+            <Route path="/new-propety" element={<NewProperty/>} />
         </Routes>
         <DevTools/>
 

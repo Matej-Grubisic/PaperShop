@@ -40,6 +40,14 @@ public interface IPaperService
     public List<OrderEntry> GetAllOrderEntries();
     
     public Order UpdateStatus(string status, int orderId);
+    public List<Property> GetAllProperties();
+
+    public PropertyDto CreateProperty(CreatePropertyDto createCreateProperty);
+
+
+    public Paper GetPaperById(int id);
+
+    public void UpdatePaper(Paper paper);
 
 }
 
@@ -49,6 +57,11 @@ public class PaperService(ILogger<PaperService> logger ,IPaperRepository paperRe
     {
         //createPaperValidator.ValidateAndThrow(createPaperDto);
         var paper = createPaperDto.ToPaper();
+        foreach (var paperProperty in paper.Properties)
+        {
+            context.Properties.Attach(paperProperty);
+        }
+        
         Paper newPaper = paperRepository.CreatePaper(paper);
         return new PaperDto().FromEntity(newPaper);
     }
@@ -125,7 +138,7 @@ public class PaperService(ILogger<PaperService> logger ,IPaperRepository paperRe
     public Paper? DiscontinuePaper(int id)
     {
         var paper = paperRepository.GetById(id);
-        //if (paper == null) return null;
+        if (paper == null) return null;
 
         paper.Discontinued = true;
         paperRepository.Update(paper);
@@ -157,4 +170,28 @@ public class PaperService(ILogger<PaperService> logger ,IPaperRepository paperRe
         paperRepository.UpdateOrder(order);
         return order;
     }
+    
+    public List<Property> GetAllProperties()
+    {
+        return context.Properties.ToList();
+    }
+
+    public PropertyDto CreateProperty(CreatePropertyDto createCreateProperty)
+    {
+        var property = createCreateProperty.ToProperty();
+        Property newProperty = paperRepository.CreateProperty(property);
+        return new PropertyDto().FromEntity(newProperty);
+    }
+
+    public Paper GetPaperById(int id)
+    {
+        return context.Papers.Find(id);
+    }
+
+    public void UpdatePaper(Paper paper)
+    {
+        context.Papers.Update(paper);
+        context.SaveChanges();
+    }
+    
 }
