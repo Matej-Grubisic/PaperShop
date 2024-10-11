@@ -2,8 +2,16 @@ import React, { useState } from 'react';
 import { http } from "../http"; // Import the HTTP functions
 import {CreatePaperDto} from "../Api";
 import { useNavigate } from 'react-router-dom';
+import { useInitializeData } from '../useInitializeData';
+import { useAtom } from 'jotai';
+import { PropertyAtom } from '../atoms/PropertyAtom';
 
 export default function NewProduct() {
+
+    useInitializeData()
+    
+    const [properties] = useAtom(PropertyAtom);
+    
     const [name, setProductName] = useState('');
     const [price, setPrice] = useState(0);
     const [stock, setStock] = useState(0);
@@ -13,7 +21,7 @@ export default function NewProduct() {
     
     
     var paperDto : CreatePaperDto = {
-        name, discontinued , price, stock
+        name, discontinued , price, stock, properties
     }
 
     const handleFormSubmit = async (event: React.FormEvent) => {
