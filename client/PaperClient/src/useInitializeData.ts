@@ -53,7 +53,7 @@ export function useInitializeData() {
             console.log("Failed to Fetch all papers" + e)
         })
     }, [])
-    /*
+    
     
     
     useEffect(() => {
@@ -62,12 +62,6 @@ export function useInitializeData() {
        }).catch(e =>{
            console.log("Failed to fetch all properties" + e);
        })
-        http.api().propertyGetAll.then((response) => {
-            setProperties(response.data);
-
-        }).catch(e => {
-            console.log("Failed to Fetch all customers" + e);
-        })
     }, [])
     
 
@@ -81,7 +75,7 @@ export function useInitializeData() {
     }, [])
 
 
-    */
+    
 
     
 }

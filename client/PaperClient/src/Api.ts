@@ -102,6 +102,13 @@ export interface CreatePaperDto {
   stock?: number;
   /** @format double */
   price?: number;
+  propertyIds?: PropertyDto[];
+}
+
+export interface PropertyDto {
+  /** @format int32 */
+  id?: number;
+  propertyName?: string;
 }
 
 export interface PaperDto {
@@ -114,25 +121,6 @@ export interface PaperDto {
   /** @format double */
   price?: number;
   properties?: PropertyDto[];
-}
-
-export interface PropertyDto {
-  /** @format int32 */
-  id?: number;
-  propertyName?: string;
-}
-
-export interface CreatePaperDto {
-export interface PaperDto {
-  /** @format int32 */
-  id?: number;
-  name?: string;
-  discontinued?: boolean;
-  /** @format int32 */
-  stock?: number;
-  /** @format double */
-  price?: number;
-  propertyIds?: PropertyDto[];
 }
 
 export interface CreatePropertyDto {
@@ -296,23 +284,6 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
         format: "json",
         ...params,
       }),
-  api = {
-    /**
-     * No description
-     *
-     * @tags Customer
-     * @name CustomerCreateCustomer
-     * @request POST:/api/Customer
-     */
-    customerCreateCustomer: (data: CreateCustomerDto, params: RequestParams = {}) =>
-      this.request<Paper, any>({
-        path: `/api/Customer`,
-        method: "POST",
-        body: data,
-        type: ContentType.Json,
-        format: "json",
-        ...params,
-      }),
 
     /**
      * No description
@@ -343,35 +314,6 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
         format: "json",
         ...params,
       }),
-    /**
-     * No description
-     *
-     * @tags Customer
-     * @name CustomerGetAllCustomers
-     * @request GET:/api/Customer
-     */
-    customerGetAllCustomers: (
-      query?: {
-        /**
-         * @format int32
-         * @default 10
-         */
-        limit?: number;
-        /**
-         * @format int32
-         * @default 0
-         */
-        startAt?: number;
-      },
-      params: RequestParams = {},
-    ) =>
-      this.request<Paper[], any>({
-        path: `/api/Customer`,
-        method: "GET",
-        query: query,
-        format: "json",
-        ...params,
-      }),
 
     /**
      * No description
@@ -382,20 +324,6 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      */
     customerGetCustomer: (customerId: number, params: RequestParams = {}) =>
       this.request<Customer, any>({
-        path: `/api/Customer/${customerId}`,
-        method: "GET",
-        format: "json",
-        ...params,
-      }),
-    /**
-     * No description
-     *
-     * @tags Customer
-     * @name CustomerGetCustomer
-     * @request GET:/api/Customer/{customerId}
-     */
-    customerGetCustomer: (customerId: number, params: RequestParams = {}) =>
-      this.request<Paper, any>({
         path: `/api/Customer/${customerId}`,
         method: "GET",
         format: "json",
@@ -448,37 +376,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
         format: "json",
         ...params,
       }),
-    /**
-     * No description
-     *
-     * @tags Customer
-     * @name CustomerDeleteCustomer
-     * @request DELETE:/api/Customer/{customerId}
-     */
-    customerDeleteCustomer: (customerId: number, params: RequestParams = {}) =>
-      this.request<Paper, any>({
-        path: `/api/Customer/${customerId}`,
-        method: "DELETE",
-        format: "json",
-        ...params,
-      }),
 
-    /**
-     * No description
-     *
-     * @tags OrderEntry
-     * @name OrderEntryCreateOrderEntry
-     * @request POST:/api/OrderEntry
-     */
-    orderEntryCreateOrderEntry: (data: CreateOrderEntryDto, params: RequestParams = {}) =>
-      this.request<OrderEntry, any>({
-        path: `/api/OrderEntry`,
-        method: "POST",
-        body: data,
-        type: ContentType.Json,
-        format: "json",
-        ...params,
-      }),
     /**
      * No description
      *
@@ -519,22 +417,6 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
         ...params,
       }),
 
-    /**
-     * No description
-     *
-     * @tags Paper
-     * @name PaperCreatePaper
-     * @request POST:/api/Paper
-     */
-    paperCreatePaper: (data: CreatePaperDto, params: RequestParams = {}) =>
-      this.request<PaperDto, any>({
-        path: `/api/Paper`,
-        method: "POST",
-        body: data,
-        type: ContentType.Json,
-        format: "json",
-        ...params,
-      }),
     /**
      * No description
      *
@@ -630,6 +512,23 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Paper
+     * @name PaperRestockPaper
+     * @request POST:/api/Paper/restock/{id}
+     */
+    paperRestockPaper: (id: number, data: number, params: RequestParams = {}) =>
+      this.request<PaperDto, any>({
+        path: `/api/Paper/restock/${id}`,
+        method: "POST",
+        body: data,
+        type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Paper
      * @name PaperGetPapersSortedByPrice
      * @request GET:/api/Paper/SortByPrice
      */
@@ -688,38 +587,6 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
         path: `/api/Paper/Search`,
         method: "GET",
         query: query,
-        format: "json",
-        ...params,
-      }),
-  };
-    /**
-     * No description
-     *
-     * @tags Paper
-     * @name PaperDiscontinuePaper
-     * @request PATCH:/api/Paper/{id}/discontinue
-     */
-    paperDiscontinuePaper: (id: number, params: RequestParams = {}) =>
-      this.request<Paper, any>({
-        path: `/api/Paper/${id}/discontinue`,
-        method: "PATCH",
-        format: "json",
-        ...params,
-      }),
-
-    /**
-     * No description
-     *
-     * @tags Paper
-     * @name PaperRestockPaper
-     * @request POST:/api/Paper/restock/{id}
-     */
-    paperRestockPaper: (id: number, data: number, params: RequestParams = {}) =>
-      this.request<PaperDto, any>({
-        path: `/api/Paper/restock/${id}`,
-        method: "POST",
-        body: data,
-        type: ContentType.Json,
         format: "json",
         ...params,
       }),
