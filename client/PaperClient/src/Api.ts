@@ -104,6 +104,18 @@ export interface CreatePaperDto {
   price?: number;
 }
 
+export interface PaperDto {
+  /** @format int32 */
+  id?: number;
+  name?: string;
+  discontinued?: boolean;
+  /** @format int32 */
+  stock?: number;
+  /** @format double */
+  price?: number;
+  properties?: Property[];
+}
+
 import type { AxiosInstance, AxiosRequestConfig, AxiosResponse, HeadersDefaults, ResponseType } from "axios";
 import axios from "axios";
 
@@ -481,6 +493,72 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       this.request<Paper, any>({
         path: `/api/Paper/${id}/discontinue`,
         method: "PATCH",
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Paper
+     * @name PaperGetPapersSortedByPrice
+     * @request GET:/api/Paper/SortByPrice
+     */
+    paperGetPapersSortedByPrice: (params: RequestParams = {}) =>
+      this.request<PaperDto[], any>({
+        path: `/api/Paper/SortByPrice`,
+        method: "GET",
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Paper
+     * @name PaperGetPapersSortedByStock
+     * @request GET:/api/Paper/SortByStock
+     */
+    paperGetPapersSortedByStock: (params: RequestParams = {}) =>
+      this.request<PaperDto[], any>({
+        path: `/api/Paper/SortByStock`,
+        method: "GET",
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Paper
+     * @name PaperGetPapersSortedByDiscount
+     * @request GET:/api/Paper/SortByDiscount
+     */
+    paperGetPapersSortedByDiscount: (params: RequestParams = {}) =>
+      this.request<PaperDto[], any>({
+        path: `/api/Paper/SortByDiscount`,
+        method: "GET",
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Paper
+     * @name PaperSearchPapers
+     * @request GET:/api/Paper/Search
+     */
+    paperSearchPapers: (
+      query?: {
+        name?: string;
+      },
+      params: RequestParams = {},
+    ) =>
+      this.request<Paper[], any>({
+        path: `/api/Paper/Search`,
+        method: "GET",
+        query: query,
         format: "json",
         ...params,
       }),

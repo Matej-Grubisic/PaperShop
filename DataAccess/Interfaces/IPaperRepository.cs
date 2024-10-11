@@ -7,6 +7,13 @@ public interface IPaperRepository
     public Paper CreatePaper(Paper paper);
 
     public List<Paper> GetAllPaper();
+    
+    public List<Paper> GetAllPapersSortedByPrice();
+    public List<Paper> GetAllPapersSortedByStockAmount();
+    public List<Paper> GetAllPapersSortedByDiscount();
+    
+    public List<Paper> SearchPapersByName(string name);
+
 
 
     public Customer CreateCustomer(Customer customer);

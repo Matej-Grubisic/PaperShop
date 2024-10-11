@@ -5,8 +5,8 @@ import {PapersAtom} from '../atoms/PaperAtom';
 
 import { useAtom } from 'jotai';
 import {useInitializeData} from '../useInitializeData'
-import React, {useEffect, useState} from "react";
-import {CreateOrderDto, CreateOrderEntryDto, Customer, Paper, OrderEntry} from '../Api';
+import React, {useState} from "react";
+import {CreateOrderDto, CreateOrderEntryDto, Customer, Paper} from '../Api';
 import { OrderEntriesAtom } from '../atoms/OrderEntriesAtom';
 import { http } from '../http';
 import toast from "react-hot-toast";

@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "API", "API\API.csproj", "{F
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Service", "Service\Service.csproj", "{68375ADE-0DE6-4A95-9A67-4673C9BDCEC5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XUnitTests", "XUnitTests\XUnitTests.csproj", "{1E2D7A2B-F5C0-4ED4-8155-B52F24668973}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceTests", "ServiceTests\ServiceTests.csproj", "{1E2D7A2B-F5C0-4ED4-8155-B52F24668973}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

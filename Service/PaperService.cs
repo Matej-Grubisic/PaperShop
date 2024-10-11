@@ -1,6 +1,7 @@
 ﻿using DataAccess;
 using DataAccess.Interfaces;
 using DataAccess.Models;
+using Microsoft.Extensions.Logging;
 using Service.TransferModels.Requests;
 using Service.TransferModels.Responses;
 
@@ -15,7 +16,12 @@ public interface IPaperService
     public Paper DeletePaper(int id);
     
     Paper? DiscontinuePaper(int id);
-
+    
+    public List<Paper> GetAllPapersSortedByPrice();
+    public List<Paper> GetAllPapersSortedByStockAmount();
+    public List<Paper> GetAllPapersSortedByDiscount();
+    
+    public List<Paper> SearchPapers(string name);
 
     public CustomerDto CreateCustomer(CreateCustomerDto createCustomerDto);
 
@@ -37,7 +43,7 @@ public interface IPaperService
 
 }
 
-public class PaperService(IPaperRepository paperRepository, PaperContext context): IPaperService
+public class PaperService(ILogger<PaperService> logger ,IPaperRepository paperRepository, PaperContext context): IPaperService
 {
     public PaperDto CreatePaper(CreatePaperDto createPaperDto)
     {
@@ -50,6 +56,27 @@ public class PaperService(IPaperRepository paperRepository, PaperContext context
     public List<Paper> GetAllPapers(int limit, int startAt)
     {
         return context.Papers.OrderBy(p => p.Id).Skip(startAt).Take(limit).ToList();
+    }
+    
+    public List<Paper> GetAllPapersSortedByPrice()
+    {
+        return paperRepository.GetAllPapersSortedByPrice();
+    }
+    public List<Paper> GetAllPapersSortedByStockAmount()
+    {
+        return paperRepository.GetAllPapersSortedByStockAmount();
+    }
+    public List<Paper> GetAllPapersSortedByDiscount()
+    {
+        return paperRepository.GetAllPapersSortedByDiscount();
+    }
+
+    public List<Paper> SearchPapers(string name)
+    {
+
+        var papers = paperRepository.SearchPapersByName(name);
+        
+        return papers;
     }
 
 
@@ -98,7 +125,7 @@ public class PaperService(IPaperRepository paperRepository, PaperContext context
     public Paper? DiscontinuePaper(int id)
     {
         var paper = paperRepository.GetById(id);
-        if (paper == null) return null;
+        //if (paper == null) return null;
 
         paper.Discontinued = true;
         paperRepository.Update(paper);
