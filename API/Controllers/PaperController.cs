@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using Service;
 using Service.TransferModels.Requests;
+using Service.TransferModels.Responses;
 
 namespace Api.Controllers;
 
@@ -57,5 +58,37 @@ public class PaperController(IPaperService service,
         }
 
         return Ok(paper);
+    }
+    
+    [HttpGet]
+    [Route("SortByPrice")]
+    public ActionResult<IEnumerable<PaperDto>> GetPapersSortedByPrice()
+    {
+        var papers = service.GetAllPapersSortedByPrice();
+        return Ok(papers);
+    }
+
+    [HttpGet]
+    [Route("SortByStock")]
+    public ActionResult<IEnumerable<PaperDto>> GetPapersSortedByStock()
+    {
+        var papers =  service.GetAllPapersSortedByStockAmount();
+        return Ok(papers);
+    }
+
+    [HttpGet]
+    [Route("SortByDiscount")]
+    public ActionResult<IEnumerable<PaperDto>> GetPapersSortedByDiscount()
+    {
+        var papers =  service.GetAllPapersSortedByDiscount();
+        return Ok(papers);
+    } 
+
+    [HttpGet]
+    [Route("Search")]
+    public ActionResult<IEnumerable<Paper>> SearchPapers(string name)
+    {
+        var papers = service.SearchPapers(name);
+        return Ok(papers);
     }
 }

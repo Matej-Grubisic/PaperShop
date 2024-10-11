@@ -16,7 +16,7 @@ public class CustomerController(IPaperService service,
 {
     [HttpPost]
     [Route("")]
-    public ActionResult<Paper> CreateCustomer(CreateCustomerDto createCustomerDto)
+    public ActionResult<Customer> CreateCustomer(CreateCustomerDto createCustomerDto)
     {
         var customer = service.CreateCustomer(createCustomerDto);
         return Ok(customer);
@@ -24,7 +24,7 @@ public class CustomerController(IPaperService service,
 
     [HttpGet]
     [Route("")]
-    public ActionResult<List<Paper>> GetAllCustomers(int limit = 10, int startAt = 0)
+    public ActionResult<List<Customer>> GetAllCustomers(int limit = 10, int startAt = 0)
     {
         var customers = service.GetAllCustomers(limit, startAt);
         return Ok(customers);
@@ -32,7 +32,7 @@ public class CustomerController(IPaperService service,
 
     [HttpGet]
     [Route("{customerId}")]
-    public ActionResult<Paper> GetCustomer(int customerId)
+    public ActionResult<Customer> GetCustomer(int customerId)
     {
         var customer = service.GetCustomerById(customerId); 
         return Ok(customer);
@@ -40,7 +40,7 @@ public class CustomerController(IPaperService service,
 
     [HttpDelete]
     [Route("{customerId}")]
-    public ActionResult<Paper> DeleteCustomer(int customerId)
+    public ActionResult<Customer> DeleteCustomer(int customerId)
     {
         service.DeleteCustomer(customerId);
         return Ok("Customer deleted:" + customerId + "!");

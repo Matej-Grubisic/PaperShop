@@ -21,4 +21,12 @@ public class OrderEntryController(IPaperService service,
         var orderEntry = service.CreateOrderEntry(orderEntryDto);
         return Ok(orderEntry);
     }
+
+    [HttpGet]
+    [Route("")]
+    public ActionResult<List<OrderEntry>> GetAllOrderEntries()
+    {
+        var orderEntries = service.GetAllOrderEntries();
+        return Ok(orderEntries);
+    }
 }

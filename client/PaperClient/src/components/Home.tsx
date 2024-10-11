@@ -1,10 +1,11 @@
 
-import {useEffect} from "react";
+//import {useEffect} from "react";
 import {useAtom} from "jotai";
 import {PapersAtom} from "../atoms/PaperAtom.tsx";
 import {useInitializeData} from "../useInitializeData.ts";
 import { useNavigate } from 'react-router-dom';
 import {http} from "../http";
+import { useState } from "react";
 
 
 
@@ -12,19 +13,27 @@ import {http} from "../http";
 
 export default function Home() {
 
-    
+    const fetchPapersByPrice = () => {
+        http.api.paperGetPapersSortedByPrice()
+            .then((response) => setPapers(response.data))
+            .catch((error) => console.error("Error fetching papers sorted by price:", error));
+    };
+    const fetchPapersByStock = () => {
+        http.api.paperGetPapersSortedByStock()
+            .then((response) => setPapers(response.data))
+            .catch((error) => console.error("Error fetching papers sorted by stock:", error));
+    };
+    const fetchPapersByDiscount = () => {
+        http.api.paperGetPapersSortedByDiscount()
+            .then((response) => setPapers(response.data))
+            .catch((error) => console.error("Error fetching papers sorted by discount:", error));
+    };
 
     const navigate = useNavigate();
-    
 
 
-    const [papers] = useAtom(PapersAtom);
-    const navigate = useNavigate()
-
-
-    useEffect(() => {
-
-    }, []);
+    const [searchQuery, setSearchQuery] = useState("");
+    const [papers, setPapers] = useAtom(PapersAtom);
 
 
     useInitializeData();
@@ -34,12 +43,63 @@ export default function Home() {
         window.location.reload();
    };
 
+    const reloadPapers=()=>{
+        http.api.paperGetAllPapers().then((response) => setPapers(response.data))
+            .catch((error) => console.error("Error fetching papers:", error))
+    }
+    const handleSearch = () => {
+        http.api.paperSearchPapers({ name: searchQuery }) // Pass as an object with 'name' property
+            .then((response) => setPapers(response.data))
+            .catch((error) => console.error("Error fetching searched papers:", error));
+    };
 
 
     return (
         <div>
+            <select
+                id="paperFilter"
+                onChange={(e) => {
+                    switch (e.target.value) {
+                        case "price":
+                            fetchPapersByPrice();
+                            break;
+                        case "stock":
+                            fetchPapersByStock();
+                            break;
+                        case "discount":
+                            fetchPapersByDiscount();
+                            break;
+                        default:
+                            fetchPapersByPrice();
+                    }
+                }}
+                className="mb-5 p-2 border border-gray-300 rounded-md"
+            >
+                <option value="sort">Sort</option>
+                <option value="price">Sort by Price</option>
+                <option value="stock">Sort by Stock</option>
+                <option value="discount">Sort by Discount</option>
+            </select>
 
-            
+            <div>
+                <input
+                    type="text"
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    placeholder="Search by name..."
+
+                />
+                <button
+                    onClick={handleSearch}
+
+                >
+                    Search
+                </button>
+                <button onClick={reloadPapers}>
+                    Reset
+                </button>
+            </div>
+
             <ul className="space-y-4">
                 {papers.map((paper) => (
                     <li key={paper.id}>
@@ -53,7 +113,7 @@ export default function Home() {
                             <div className="mt-4 space-x-2">
                                 <button
                                     key={paper.id}
-                                    className="btn bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600" 
+                                    className="btn bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600"
                                     onClick={() => handleDiscontinue(paper.id)}
                                 >
                                     Discontinue
@@ -70,7 +130,7 @@ export default function Home() {
                 ))}
             </ul>
 
-            
+
             <button
                 className="btn bg-white text-black border border-gray-300 hover:bg-gray-100 mt-8"
                 onClick={() => navigate('/new-product')}

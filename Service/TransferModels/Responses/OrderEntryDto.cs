@@ -11,9 +11,6 @@ public class OrderEntryDto
             Id = orderEntry.Id,
             Quantity = orderEntry.Quantity,
             ProductId = orderEntry.ProductId,
-            OrderId = orderEntry.OrderId,
-            Order = orderEntry.Order,
-            Product = orderEntry.Product
         };
     }
     
@@ -22,11 +19,6 @@ public class OrderEntryDto
     public int Quantity { get; set; }
 
     public int? ProductId { get; set; }
-
-    public int? OrderId { get; set; }
     
-    public Order? Order { get; set; }
-
-    public Paper? Product { get; set; }
 
 }

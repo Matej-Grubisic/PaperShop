@@ -1,11 +1,11 @@
-using System.Collections;
+using DataAccess;
 using DataAccess.Interfaces;
 using DataAccess.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace DataAccess;
+namespace TestProject1;
 
-public class PaperRepository(PaperContext context) : IPaperRepository
+public class StubPaperRepository(PaperContext context) : IPaperRepository
 {
     public Paper CreatePaper(Paper paper)
     {
@@ -124,6 +124,4 @@ public class PaperRepository(PaperContext context) : IPaperRepository
         context.Orders.Update(order);
         context.SaveChanges();
     }
-    
-    
 }

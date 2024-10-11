@@ -9,30 +9,14 @@
  * ---------------------------------------------------------------
  */
 
-export interface Paper {
+export interface Customer {
   /** @format int32 */
   id?: number;
   name?: string;
-  discontinued?: boolean;
-  /** @format int32 */
-  stock?: number;
-  /** @format double */
-  price?: number;
-  orderEntries?: OrderEntry[];
-  properties?: Property[];
-}
-
-export interface OrderEntry {
-  /** @format int32 */
-  id?: number;
-  /** @format int32 */
-  quantity?: number;
-  /** @format int32 */
-  productId?: number | null;
-  /** @format int32 */
-  orderId?: number | null;
-  order?: Order | null;
-  product?: Paper | null;
+  address?: string | null;
+  phone?: string | null;
+  email?: string | null;
+  orders?: Order[];
 }
 
 export interface Order {
@@ -51,14 +35,30 @@ export interface Order {
   orderEntries?: OrderEntry[];
 }
 
-export interface Customer {
+export interface OrderEntry {
+  /** @format int32 */
+  id?: number;
+  /** @format int32 */
+  quantity?: number;
+  /** @format int32 */
+  productId?: number | null;
+  /** @format int32 */
+  orderId?: number | null;
+  order?: Order | null;
+  product?: Paper | null;
+}
+
+export interface Paper {
   /** @format int32 */
   id?: number;
   name?: string;
-  address?: string | null;
-  phone?: string | null;
-  email?: string | null;
-  orders?: Order[];
+  discontinued?: boolean;
+  /** @format int32 */
+  stock?: number;
+  /** @format double */
+  price?: number;
+  orderEntries?: OrderEntry[];
+  properties?: Property[];
 }
 
 export interface Property {
@@ -75,16 +75,38 @@ export interface CreateCustomerDto {
   email?: string;
 }
 
+export interface CreateOrderDto {
+  /** @format date-time */
+  orderDate?: string;
+  /** @format date */
+  deliveryDate?: string | null;
+  status?: string;
+  /** @format double */
+  totalAmount?: number;
+  /** @format int32 */
+  customerId?: number | null;
+  orderEntries?: CreateOrderEntryDto[];
+}
+
 export interface CreateOrderEntryDto {
   /** @format int32 */
   quantity?: number;
   /** @format int32 */
   productId?: number | null;
-  /** @format int32 */
-  orderId?: number | null;
 }
 
 export interface CreatePaperDto {
+  name?: string;
+  discontinued?: boolean;
+  /** @format int32 */
+  stock?: number;
+  /** @format double */
+  price?: number;
+}
+
+export interface PaperDto {
+  /** @format int32 */
+  id?: number;
   name?: string;
   discontinued?: boolean;
   /** @format int32 */
@@ -234,175 +256,311 @@ export class HttpClient<SecurityDataType = unknown> {
  * @baseUrl http://localhost:5000
  */
 export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDataType> {
-    api = {
-        /**
-         * No description
-         *
-         * @tags Customer
-         * @name CustomerCreateCustomer
-         * @request POST:/api/Customer
-         */
-        customerCreateCustomer: (data: CreateCustomerDto, params: RequestParams = {}) =>
-            this.request<Paper, any>({
-                path: `/api/Customer`,
-                method: "POST",
-                body: data,
-                type: ContentType.Json,
-                format: "json",
-                ...params,
-            }),
+  api = {
+    /**
+     * No description
+     *
+     * @tags Customer
+     * @name CustomerCreateCustomer
+     * @request POST:/api/Customer
+     */
+    customerCreateCustomer: (data: CreateCustomerDto, params: RequestParams = {}) =>
+      this.request<Customer, any>({
+        path: `/api/Customer`,
+        method: "POST",
+        body: data,
+        type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
 
+    /**
+     * No description
+     *
+     * @tags Customer
+     * @name CustomerGetAllCustomers
+     * @request GET:/api/Customer
+     */
+    customerGetAllCustomers: (
+      query?: {
         /**
-         * No description
-         *
-         * @tags Customer
-         * @name CustomerGetAllCustomers
-         * @request GET:/api/Customer
+         * @format int32
+         * @default 10
          */
-        customerGetAllCustomers: (
-            query?: {
-                /**
-                 * @format int32
-                 * @default 10
-                 */
-                limit?: number;
-                /**
-                 * @format int32
-                 * @default 0
-                 */
-                startAt?: number;
-            },
-            params: RequestParams = {},
-        ) =>
-            this.request<Paper[], any>({
-                path: `/api/Customer`,
-                method: "GET",
-                query: query,
-                format: "json",
-                ...params,
-            }),
+        limit?: number;
+        /**
+         * @format int32
+         * @default 0
+         */
+        startAt?: number;
+      },
+      params: RequestParams = {},
+    ) =>
+      this.request<Customer[], any>({
+        path: `/api/Customer`,
+        method: "GET",
+        query: query,
+        format: "json",
+        ...params,
+      }),
 
-        /**
-         * No description
-         *
-         * @tags Customer
-         * @name CustomerGetCustomer
-         * @request GET:/api/Customer/{customerId}
-         */
-        customerGetCustomer: (customerId: number, params: RequestParams = {}) =>
-            this.request<Paper, any>({
-                path: `/api/Customer/${customerId}`,
-                method: "GET",
-                format: "json",
-                ...params,
-            }),
+    /**
+     * No description
+     *
+     * @tags Customer
+     * @name CustomerGetCustomer
+     * @request GET:/api/Customer/{customerId}
+     */
+    customerGetCustomer: (customerId: number, params: RequestParams = {}) =>
+      this.request<Customer, any>({
+        path: `/api/Customer/${customerId}`,
+        method: "GET",
+        format: "json",
+        ...params,
+      }),
 
-        /**
-         * No description
-         *
-         * @tags Customer
-         * @name CustomerDeleteCustomer
-         * @request DELETE:/api/Customer/{customerId}
-         */
-        customerDeleteCustomer: (customerId: number, params: RequestParams = {}) =>
-            this.request<Paper, any>({
-                path: `/api/Customer/${customerId}`,
-                method: "DELETE",
-                format: "json",
-                ...params,
-            }),
+    /**
+     * No description
+     *
+     * @tags Customer
+     * @name CustomerDeleteCustomer
+     * @request DELETE:/api/Customer/{customerId}
+     */
+    customerDeleteCustomer: (customerId: number, params: RequestParams = {}) =>
+      this.request<Customer, any>({
+        path: `/api/Customer/${customerId}`,
+        method: "DELETE",
+        format: "json",
+        ...params,
+      }),
 
-        /**
-         * No description
-         *
-         * @tags OrderEntry
-         * @name OrderEntryCreateOrderEntry
-         * @request POST:/api/OrderEntry
-         */
-        orderEntryCreateOrderEntry: (data: CreateOrderEntryDto, params: RequestParams = {}) =>
-            this.request<OrderEntry, any>({
-                path: `/api/OrderEntry`,
-                method: "POST",
-                body: data,
-                type: ContentType.Json,
-                format: "json",
-                ...params,
-            }),
+    /**
+     * No description
+     *
+     * @tags Order
+     * @name OrderCreateOrder
+     * @request POST:/api/Order
+     */
+    orderCreateOrder: (data: CreateOrderDto, params: RequestParams = {}) =>
+      this.request<Order, any>({
+        path: `/api/Order`,
+        method: "POST",
+        body: data,
+        type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
 
-        /**
-         * No description
-         *
-         * @tags Paper
-         * @name PaperCreatePaper
-         * @request POST:/api/Paper
-         */
-        paperCreatePaper: (data: CreatePaperDto, params: RequestParams = {}) =>
-            this.request<Paper, any>({
-                path: `/api/Paper`,
-                method: "POST",
-                body: data,
-                type: ContentType.Json,
-                format: "json",
-                ...params,
-            }),
+    /**
+     * No description
+     *
+     * @tags Order
+     * @name OrderGetAllOrders
+     * @request GET:/api/Order
+     */
+    orderGetAllOrders: (params: RequestParams = {}) =>
+      this.request<Order[], any>({
+        path: `/api/Order`,
+        method: "GET",
+        format: "json",
+        ...params,
+      }),
 
-        /**
-         * No description
-         *
-         * @tags Paper
-         * @name PaperGetAllPapers
-         * @request GET:/api/Paper
-         */
-        paperGetAllPapers: (
-            query?: {
-                /**
-                 * @format int32
-                 * @default 10
-                 */
-                limit?: number;
-                /**
-                 * @format int32
-                 * @default 0
-                 */
-                startAt?: number;
-            },
-            params: RequestParams = {},
-        ) =>
-            this.request<Paper[], any>({
-                path: `/api/Paper`,
-                method: "GET",
-                query: query,
-                format: "json",
-                ...params,
-            }),
+    /**
+     * No description
+     *
+     * @tags Order
+     * @name OrderUpdateOrder
+     * @request PATCH:/api/Order
+     */
+    orderUpdateOrder: (
+      query?: {
+        status?: string;
+        /** @format int32 */
+        orderId?: number;
+      },
+      params: RequestParams = {},
+    ) =>
+      this.request<Order, any>({
+        path: `/api/Order`,
+        method: "PATCH",
+        query: query,
+        format: "json",
+        ...params,
+      }),
 
-        /**
-         * No description
-         *
-         * @tags Paper
-         * @name PaperDeletePaper
-         * @request DELETE:/api/Paper/{id}
-         */
-        paperDeletePaper: (id: number, params: RequestParams = {}) =>
-            this.request<File, any>({
-                path: `/api/Paper/${id}`,
-                method: "DELETE",
-                ...params,
-            }),
+    /**
+     * No description
+     *
+     * @tags OrderEntry
+     * @name OrderEntryCreateOrderEntry
+     * @request POST:/api/OrderEntry
+     */
+    orderEntryCreateOrderEntry: (data: CreateOrderEntryDto, params: RequestParams = {}) =>
+      this.request<OrderEntry, any>({
+        path: `/api/OrderEntry`,
+        method: "POST",
+        body: data,
+        type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
 
+    /**
+     * No description
+     *
+     * @tags OrderEntry
+     * @name OrderEntryGetAllOrderEntries
+     * @request GET:/api/OrderEntry
+     */
+    orderEntryGetAllOrderEntries: (params: RequestParams = {}) =>
+      this.request<OrderEntry[], any>({
+        path: `/api/OrderEntry`,
+        method: "GET",
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Paper
+     * @name PaperCreatePaper
+     * @request POST:/api/Paper
+     */
+    paperCreatePaper: (data: CreatePaperDto, params: RequestParams = {}) =>
+      this.request<Paper, any>({
+        path: `/api/Paper`,
+        method: "POST",
+        body: data,
+        type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Paper
+     * @name PaperGetAllPapers
+     * @request GET:/api/Paper
+     */
+    paperGetAllPapers: (
+      query?: {
         /**
-         * No description
-         *
-         * @tags Paper
-         * @name PaperDiscontinuePaper
-         * @request PATCH:/api/Paper/{id}/discontinue
+         * @format int32
+         * @default 10
          */
-        paperDiscontinuePaper: (id: number, params: RequestParams = {}) =>
-            this.request<Paper, any>({
-                path: `/api/Paper/${id}/discontinue`,
-                method: "PATCH",
-                format: "json",
-                ...params,
-            }),
-    };
+        limit?: number;
+        /**
+         * @format int32
+         * @default 0
+         */
+        startAt?: number;
+      },
+      params: RequestParams = {},
+    ) =>
+      this.request<Paper[], any>({
+        path: `/api/Paper`,
+        method: "GET",
+        query: query,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Paper
+     * @name PaperDeletePaper
+     * @request DELETE:/api/Paper/{id}
+     */
+    paperDeletePaper: (id: number, params: RequestParams = {}) =>
+      this.request<File, any>({
+        path: `/api/Paper/${id}`,
+        method: "DELETE",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Paper
+     * @name PaperDiscontinuePaper
+     * @request PATCH:/api/Paper/{id}/discontinue
+     */
+    paperDiscontinuePaper: (id: number, params: RequestParams = {}) =>
+      this.request<Paper, any>({
+        path: `/api/Paper/${id}/discontinue`,
+        method: "PATCH",
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Paper
+     * @name PaperGetPapersSortedByPrice
+     * @request GET:/api/Paper/SortByPrice
+     */
+    paperGetPapersSortedByPrice: (params: RequestParams = {}) =>
+      this.request<PaperDto[], any>({
+        path: `/api/Paper/SortByPrice`,
+        method: "GET",
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Paper
+     * @name PaperGetPapersSortedByStock
+     * @request GET:/api/Paper/SortByStock
+     */
+    paperGetPapersSortedByStock: (params: RequestParams = {}) =>
+      this.request<PaperDto[], any>({
+        path: `/api/Paper/SortByStock`,
+        method: "GET",
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Paper
+     * @name PaperGetPapersSortedByDiscount
+     * @request GET:/api/Paper/SortByDiscount
+     */
+    paperGetPapersSortedByDiscount: (params: RequestParams = {}) =>
+      this.request<PaperDto[], any>({
+        path: `/api/Paper/SortByDiscount`,
+        method: "GET",
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Paper
+     * @name PaperSearchPapers
+     * @request GET:/api/Paper/Search
+     */
+    paperSearchPapers: (
+      query?: {
+        name?: string;
+      },
+      params: RequestParams = {},
+    ) =>
+      this.request<Paper[], any>({
+        path: `/api/Paper/Search`,
+        method: "GET",
+        query: query,
+        format: "json",
+        ...params,
+      }),
+  };
 }
